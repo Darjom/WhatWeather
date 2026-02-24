@@ -61,3 +61,39 @@
 .home--storm {
   background-image: url("../assets/background/tormenta.png");
 }
+
+.weather-card {
+  background-color: rgba(244, 247, 246, 0.72); /* 72% transparencia */
+  border-radius: 24px;
+  padding: 2.5rem;
+  backdrop-filter: blur(8px);
+}
+
+/* CARD PRINCIPAL */
+.weather-card__temperature {
+  font-size: 5rem;
+  font-weight: 700;
+}
+
+.weather-card__condition {
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.weather-card__updated {
+  font-size: 1rem;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+.weather-card__icon-image {
+  width: 180px;
+  height: auto;
+}
+
+.weather-card__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
