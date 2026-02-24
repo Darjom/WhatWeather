@@ -2,6 +2,7 @@ import { useWeather } from "../hooks/useWeather";
 import { mapWeatherCodeToType } from "../utils/weatherMapper";
 import "../styles/home.css";
 
+
 const Home = () => {
   const { data, loading, error } = useWeather();
 
@@ -30,6 +31,7 @@ const Home = () => {
 
   return (
     <div className={`home home--${weatherType}`}>
+      
       <div className="home__container">
         <h1 className="home__title">Cochabamba</h1>
 
