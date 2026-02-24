@@ -1,59 +1,74 @@
 import { useWeather } from "../hooks/useWeather";
-import sunnyBg from "../assets/background/soleado.png";
-import rainyBg from "../assets/background/lluvioso.png";
-import cloudyBg from "../assets/background/nublado.png";
-import stormBg from "../assets/background/tormenta.png";
+import { mapWeatherCodeToType } from "../utils/weatherMapper";
+import "../styles/home.css";
 
 const Home = () => {
   const { data, loading, error } = useWeather();
 
-  if (loading) return <p>Cargando clima de Cochabamba...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!data) return <p>No hay datos disponibles.</p>;
+  if (loading)
+    return (
+      <div className="home home--loading">
+        <p className="home__loading">
+          Cargando clima de Cochabamba...
+        </p>
+      </div>
+    );
 
-  const getBackground = (code: number) => {
-    if (code === 0) return sunnyBg;
-    if (code >= 1 && code <= 3) return cloudyBg;
-    if (code >= 51 && code <= 67) return rainyBg;
-    if (code >= 80) return stormBg;
-    return sunnyBg;
-  };
+  if (error)
+    return (
+      <div className="home home--error">
+        <p className="home__error">Error: {error}</p>
+      </div>
+    );
 
-  const weatherCode = data.current_weather.weathercode;
-  const backgroundImage = getBackground(weatherCode);
+  if (!data) return null;
+
+  // 🔥 ahora sí podemos usar data con seguridad
+  const weatherType = mapWeatherCodeToType(
+    data.current_weather.weathercode
+  );
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        minHeight: "100vh",
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        color: "white"
-      }}
-    >
-      <h1>Cochabamba</h1>
+    <div className={`home home--${weatherType}`}>
+      <div className="home__container">
+        <h1 className="home__title">Cochabamba</h1>
 
-      <section>
-        <h2>Clima Actual</h2>
-        <p>Temperatura: {data.current_weather.temperature}°C</p>
-        <p>Viento: {data.current_weather.windspeed} km/h</p>
-        <p>Dirección: {data.current_weather.winddirection}°</p>
-      </section>
+        <section className="home__current">
+          <h2 className="home__section-title">Clima actual</h2>
 
-      <section>
-        <h2>Pronóstico 7 días</h2>
-        {data.daily.time.map((date, index) => (
-          <div key={date}>
-            <strong>{date}</strong>
-            <div>
-              Mín: {data.daily.temperature_2m_min[index]}°C |
-              Máx: {data.daily.temperature_2m_max[index]}°C
-            </div>
+          <p className="home__temperature">
+            {data.current_weather.temperature}°C
+          </p>
+
+          <p className="home__wind">
+            {data.current_weather.windspeed} km/h
+          </p>
+        </section>
+
+        <section className="home__forecast">
+          <h2 className="home__section-title">
+            Pronóstico 7 días
+          </h2>
+
+          <div className="home__forecast-grid">
+            {data.daily.time.map((date, index) => (
+              <div className="home__forecast-card" key={date}>
+                <span className="home__forecast-date">
+                  {date}
+                </span>
+
+                <span className="home__forecast-min">
+                  {data.daily.temperature_2m_min[index]}°C
+                </span>
+
+                <span className="home__forecast-max">
+                  {data.daily.temperature_2m_max[index]}°C
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

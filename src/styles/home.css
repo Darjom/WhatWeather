@@ -1,0 +1,63 @@
+
+.home {
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.home__container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.home__title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.home__current {
+  margin-bottom: 3rem;
+}
+
+.home__temperature {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.home__forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.home__forecast-card {
+  padding: 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+.home {
+  min-height: 100vh;
+  padding: 2rem;
+  transition: background 0.6s ease-in-out;
+  background-size: cover;
+  background-position: center;
+}
+
+/* MODIFIERS */
+
+.home--sunny {
+  background-image: url("../assets/background/soleado.png");
+}
+
+.home--cloudy {
+  background-image: url("../assets/background/nublado.png");
+}
+
+.home--rainy {
+  background-image: url("../assets/background/lluvioso.png");
+}
+
+.home--storm {
+  background-image: url("../assets/background/tormenta.png");
+}
