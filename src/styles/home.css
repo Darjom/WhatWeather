@@ -294,3 +294,49 @@
   font-size: 1.2rem;
   opacity: 0.6;
 }
+
+/* HEADER SUPERIOR */
+.home__header {
+  margin-bottom: 2.5rem;
+}
+
+/* BUSCADOR */
+.home__search {
+  max-width: 350px;
+}
+
+.home__search-input {
+  border-radius: 50px 0 0 50px;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  background-color: rgba(244, 247, 246, 0.85);
+}
+
+.home__search-input:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.home__search-button {
+  border-radius: 0 50px 50px 0;
+  background-color: rgba(244, 247, 246, 0.85);
+  border: none;
+  padding: 0 1.2rem;
+}
+
+.home__search-button i {
+  font-size: 1.1rem;
+}
+
+/* UBICACIÓN */
+.home__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.home__location-icon {
+  font-size: 1.6rem;
+}

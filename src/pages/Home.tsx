@@ -53,7 +53,35 @@ const Home = () => {
   return (
     <div className={`home home--${weatherType}`}>
       <div className="home__container">
-        <h1 className="home__title">Cochabamba</h1>
+        <div className="home__header container-fluid">
+          <div className="row align-items-center">
+
+            {/* IZQUIERDA — BUSCADOR */}
+            <div className="col-md-6 col-12 mb-3 mb-md-0">
+              <div className="home__search input-group">
+                <input
+                  type="text"
+                  className="form-control home__search-input"
+                  placeholder="Buscar ciudad..."
+                />
+                <button className="btn home__search-button">
+                  <i className="bi bi-search"></i>
+                </button>
+              </div>
+            </div>
+
+            {/* DERECHA — CIUDAD */}
+            <div className="col-md-6 col-12 text-md-end text-center">
+              <div className="home__location">
+                <i className="bi bi-geo-alt-fill home__location-icon"></i>
+                <span className="home__location-text">
+                  Cochabamba
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
 
         {/* WEATHER CARD */}
         <div className="weather-card">
