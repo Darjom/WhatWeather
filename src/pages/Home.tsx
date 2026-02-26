@@ -42,6 +42,14 @@ const Home = () => {
   const todayRainProbability =
   data.daily?.precipitation_probability_max?.[0] ?? "--";
 
+  const formatDayName = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return date.toLocaleDateString("es-ES", {
+    weekday: "long",
+  });
+  };
+
   return (
     <div className={`home home--${weatherType}`}>
       <div className="home__container">
@@ -117,7 +125,7 @@ const Home = () => {
               return (
                 <div className="forecast-card" key={date}>
                   <div className="forecast-card__day">
-                    {date}
+                    {formatDayName(date)}
                   </div>
 
                   <div className="forecast-card__icon">
@@ -125,14 +133,12 @@ const Home = () => {
                   </div>
 
                   <div className="forecast-card__temp">
-                    {Math.round(
-                      data.daily.temperature_2m_max[index]
-                    )}
-                    ° /{" "}
-                    {Math.round(
-                      data.daily.temperature_2m_min[index]
-                    )}
-                    °
+                    <span className="forecast-card__temp-max">
+                      {Math.round(data.daily.temperature_2m_max[index])}°
+                    </span>
+                    <span className="forecast-card__temp-min">
+                      / {Math.round(data.daily.temperature_2m_min[index])}°
+                    </span>
                   </div>
                 </div>
               );

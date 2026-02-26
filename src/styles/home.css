@@ -276,3 +276,21 @@
   height: auto;
   object-fit: contain;
 }
+
+
+.forecast-card__temp {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.forecast-card__temp-max {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.forecast-card__temp-min {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
