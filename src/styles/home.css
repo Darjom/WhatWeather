@@ -1,50 +1,25 @@
+/* ============================= */
+/* GLOBAL HOME */
+/* ============================= */
 
 .home {
   min-height: 100vh;
-  padding: 2rem;
+  padding: 2rem 1rem;
   display: flex;
   justify-content: center;
-}
-
-.home__container {
-  width: 100%;
-  max-width: 900px;
-}
-
-.home__title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-.home__current {
-  margin-bottom: 3rem;
-}
-
-.home__temperature {
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.home__forecast-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-}
-
-.home__forecast-card {
-  padding: 1rem;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-.home {
-  min-height: 100vh;
-  padding: 2rem;
   transition: background 0.6s ease-in-out;
   background-size: cover;
   background-position: center;
 }
 
-/* MODIFIERS */
+.home__container {
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* ============================= */
+/* BACKGROUND MODIFIERS */
+/* ============================= */
 
 .home--sunny {
   background-image: url("../assets/background/soleado.png");
@@ -62,23 +37,61 @@
   background-image: url("../assets/background/tormenta.png");
 }
 
-.weather-card {
-  background-color: rgba(244, 247, 246, 0.72); /* 72% transparencia */
-  border-radius: 24px;
-  padding: 2.5rem;
-  backdrop-filter: blur(8px);
+/* ============================= */
+/* TITLE */
+/* ============================= */
+
+.home__title {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  margin-bottom: 2rem;
+  font-weight: 600;
 }
 
-/* CARD PRINCIPAL */
-.weather-card__temperature {
-  font-size: 5rem;
-  font-weight: 700;
+/* ============================= */
+/* WEATHER CARD */
+/* ============================= */
+
+.weather-card {
+  background: rgba(244, 247, 246, 0.72);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
+
+/* TOP SECTION */
+
+.weather-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* LEFT SIDE */
+
+.weather-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Temperature */
+
+.weather-card__temperature {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Condition */
 
 .weather-card__condition {
-  font-size: 2rem;
-  margin-top: 0.5rem;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  margin-top: 1rem;
+  font-weight: 500;
 }
+
+/* Updated */
 
 .weather-card__updated {
   font-size: 1rem;
@@ -86,31 +99,73 @@
   opacity: 0.7;
 }
 
+/* MAIN ICON */
+
+.weather-card__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .weather-card__icon-image {
-  width: 180px;
+  width: clamp(140px, 20vw, 220px);
   height: auto;
+}
+
+/* ============================= */
+/* STATS SECTION */
+/* ============================= */
+
+.weather-card__bottom {
+  margin-top: 2.5rem;
+}
+
+.weather-card__stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .weather-card__stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  text-align: center;
+  flex: 1;
+  min-width: 100px;
 }
-/*Carruzel*/
 
-/* Contenedor general */
+.weather-card__stat img {
+  width: clamp(40px, 6vw, 60px);
+  margin-bottom: 0.6rem;
+}
+
+.weather-card__stat span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ============================= */
+/* FORECAST SECTION */
+/* ============================= */
+
+.forecast-section {
+  margin-top: 3rem;
+}
+
 .forecast-section__header {
-  background-color: rgba(244, 247, 246, 0.72);
-  padding: 1.2rem 2rem;
-  border-radius: 20px;
-  font-size: 1.4rem;
+  background: rgba(244, 247, 246, 0.72);
+  backdrop-filter: blur(12px);
+  padding: 1rem 2rem;
+  border-radius: 24px;
+  font-size: 1.3rem;
   font-weight: 600;
-  backdrop-filter: blur(8px);
   margin-bottom: 2rem;
 }
 
-/* Carrusel horizontal */
+/* Carousel */
+
 .forecast-section__carousel {
   display: flex;
   gap: 1.5rem;
@@ -119,41 +174,105 @@
   padding-bottom: 1rem;
 }
 
-/* Card individual */
+.forecast-section__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Forecast Card */
+
 .forecast-card {
-  min-width: 180px;
-  background-color: rgba(244, 247, 246, 0.72);
+  min-width: 160px;
+  background: rgba(244, 247, 246, 0.72);
+  backdrop-filter: blur(12px);
   border-radius: 24px;
   padding: 1.5rem;
   text-align: center;
-  backdrop-filter: blur(8px);
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
 .forecast-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
-/* Día */
+/* Day */
+
 .forecast-card__day {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
-/* Icono */
+/* Icon */
+
 .forecast-card__icon img {
-  width: 90px;
+  width: clamp(60px, 8vw, 90px);
   margin-bottom: 1rem;
 }
 
-/* Temperatura */
+/* Temp */
+
 .forecast-card__temp {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
 .forecast-card__min {
   opacity: 0.6;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+}
+
+/* ============================= */
+/* RESPONSIVE BREAKPOINTS */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .weather-card__top {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .weather-card__stats {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .forecast-section__header {
+    text-align: center;
+  }
+
+}
+
+
+
+
+.weather-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 300px;
+}
+
+/* Lado izquierdo */
+.weather-card__info {
+  flex: 1;
+}
+
+/* Lado derecho */
+.weather-card__icon-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Icono grande */
+.weather-card__icon-image {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
 }

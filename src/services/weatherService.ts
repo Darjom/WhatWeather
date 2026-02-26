@@ -1,6 +1,6 @@
 export const getWeather = async () => {
   const response = await fetch(
-    "https://api.open-meteo.com/v1/forecast?latitude=-17.3895&longitude=-66.1568&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=auto"
+    "https://api.open-meteo.com/v1/forecast?latitude=-17.38&longitude=-66.15&current_weather=true&hourly=relativehumidity_2m&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max&timezone=auto"
   );
 
   if (!response.ok) {

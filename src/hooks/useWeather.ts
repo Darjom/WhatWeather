@@ -6,12 +6,20 @@ export interface WeatherResponse {
     windspeed: number;
     winddirection: number;
     weathercode: number;
+    time: string;
   };
+
+  hourly: {
+    time: string[];
+    relativehumidity_2m: number[];
+  };
+
   daily: {
     time: string[];
     temperature_2m_max: number[];
     temperature_2m_min: number[];
     weathercode: number[];
+    precipitation_probability_max: number[];
   };
 }
 export const useWeather = () => {
