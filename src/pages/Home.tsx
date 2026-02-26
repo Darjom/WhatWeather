@@ -1,20 +1,75 @@
+import { useState, useEffect } from "react";
 import { useWeather } from "../hooks/useWeather";
+import { searchCity } from "../services/geocodingService";
+
 import { mapWeatherCodeToType } from "../utils/weatherMapper";
 import { mapWeatherCodeToIcon } from "../utils/weatherIconMapper";
 import { mapWeatherCodeToLabel } from "../utils/weatherLabelMapper";
-import "../styles/home.css";
 
 import windIcon from "../assets/icons/wind.png";
 import humidityIcon from "../assets/icons/humidity.png";
 import rainIcon from "../assets/icons/rainny.png";
 
+import type { CityResult } from "../types/geocoding";
+
+import "../styles/home.css";
+
 const Home = () => {
-  const { data, loading, error } = useWeather();
+   
+  /* ESTADOS PRINCIPALES  */
+
+  const [latitude, setLatitude] = useState(-17.3895);
+  const [longitude, setLongitude] = useState(-66.1568);
+  const [cityName, setCityName] = useState("Cochabamba");
+
+  const { data, loading, error } = useWeather(latitude, longitude);
+
+  /* BUSCADOR             */
+
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<CityResult[]>([]);
+
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchSuggestions = async () => {
+      if (query.length < 3) {
+        return; // NO setState aquí
+      }
+
+      try {
+        const results = await searchCity(query);
+        setSuggestions(results);
+      } catch {
+        setSuggestions([]);
+      }
+    };
+
+    const timeout = setTimeout(fetchSuggestions, 400);
+
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, [query]);
+
+  /* FORMATOS             */
+
+  const formatDayName = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = date.toLocaleDateString("es-ES", {
+      weekday: "long",
+    });
+    return day.charAt(0).toUpperCase() + day.slice(1);
+  };
+
+  /* LOADING / ERROR      */
 
   if (loading) {
     return (
       <div className="home home--loading">
-        <p>Cargando clima de Cochabamba...</p>
+        <p>Cargando clima...</p>
       </div>
     );
   }
@@ -29,6 +84,8 @@ const Home = () => {
 
   if (!data) return null;
 
+  /* DATOS CLIMA ACTUAL   */
+
   const weatherType = mapWeatherCodeToType(
     data.current_weather.weathercode
   );
@@ -36,59 +93,83 @@ const Home = () => {
   const mainIcon = mapWeatherCodeToIcon(
     data.current_weather.weathercode
   );
+
+  // Humedad actual
+  const currentHour = data.current_weather.time.slice(0, 13); 
+  const currentIndex = data.hourly.time.findIndex(
+    (t) => t.startsWith(currentHour)
+  );
+
   const currentHumidity =
-  data.hourly?.relativehumidity_2m?.[0] ?? "--";
+    currentIndex !== -1 && currentIndex !== undefined
+      ? data.hourly.relativehumidity_2m[currentIndex]
+      : "--";
 
+  // Probabilidad lluvia hoy
   const todayRainProbability =
-  data.daily?.precipitation_probability_max?.[0] ?? "--";
+    data.daily?.precipitation_probability_max?.[0] ?? "--";
 
-  const formatDayName = (dateString: string) => {
-  const date = new Date(dateString);
-
-  return date.toLocaleDateString("es-ES", {
-    weekday: "long",
-  });
-  };
+  /*Contenido*/
 
   return (
     <div className={`home home--${weatherType}`}>
       <div className="home__container">
-        <div className="home__header container-fluid">
+
+        {/* HEADER SUPERIOR */}
+        <div className="home__header">
           <div className="row align-items-center">
 
-            {/* IZQUIERDA — BUSCADOR */}
-            <div className="col-md-6 col-12 mb-3 mb-md-0">
+            {/* BUSCADOR */}
+            <div className="col-md-6 col-12 mb-3 mb-md-0 home__search-wrapper">
               <div className="home__search input-group">
                 <input
                   type="text"
-                  className="form-control home__search-input"
+                  className="form-control"
                   placeholder="Buscar ciudad..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
-                <button className="btn home__search-button">
-                  <i className="bi bi-search"></i>
-                </button>
               </div>
+
+              {/* SUGERENCIAS */}
+              {suggestions.length > 0 && (
+                <ul className="home__suggestions">
+                  {suggestions.map((city) => (
+                    <li
+                      key={city.id}
+                      onClick={() => {
+                        setLatitude(city.latitude);
+                        setLongitude(city.longitude);
+                        setCityName(city.name);
+                        setQuery("");
+                        setSuggestions([]);
+                      }}
+                    >
+                      {city.name}, {city.country}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
 
-            {/* DERECHA — CIUDAD */}
+            {/* CIUDAD */}
             <div className="col-md-6 col-12 text-md-end text-center">
               <div className="home__location">
-                <i className="bi bi-geo-alt-fill home__location-icon"></i>
-                <span className="home__location-text">
-                  Cochabamba
-                </span>
+                <i className="bi bi-geo-alt-fill"></i>
+                <span>{cityName}</span>
               </div>
             </div>
 
           </div>
         </div>
 
-        {/* WEATHER CARD */}
         <div className="weather-card">
+
           <div className="weather-card__top">
 
             {/* IZQUIERDA */}
             <div className="weather-card__info">
+
               <div className="weather-card__temperature">
                 {Math.round(data.current_weather.temperature)}°C
               </div>
@@ -103,6 +184,7 @@ const Home = () => {
                 Última actualización:{" "}
                 {data.current_weather.time.slice(11, 16)}
               </div>
+
             </div>
 
             {/* DERECHA */}
@@ -113,6 +195,7 @@ const Home = () => {
                 className="weather-card__icon-image"
               />
             </div>
+
           </div>
 
           {/* BLOQUE INFERIOR */}
@@ -136,6 +219,7 @@ const Home = () => {
 
             </div>
           </div>
+
         </div>
 
         {/* FORECAST */}
@@ -145,13 +229,14 @@ const Home = () => {
           </div>
 
           <div className="forecast-section__carousel">
-            {data.daily.time.map((date, index) => {
+            {data.daily.time.map((date: string, index: number) => {
               const icon = mapWeatherCodeToIcon(
                 data.daily.weathercode[index]
               );
 
               return (
                 <div className="forecast-card" key={date}>
+
                   <div className="forecast-card__day">
                     {formatDayName(date)}
                   </div>
@@ -162,12 +247,18 @@ const Home = () => {
 
                   <div className="forecast-card__temp">
                     <span className="forecast-card__temp-max">
-                      {Math.round(data.daily.temperature_2m_max[index])}°
+                      {Math.round(
+                        data.daily.temperature_2m_max[index]
+                      )}°
                     </span>
+
                     <span className="forecast-card__temp-min">
-                      / {Math.round(data.daily.temperature_2m_min[index])}°
+                      / {Math.round(
+                        data.daily.temperature_2m_min[index]
+                      )}°
                     </span>
                   </div>
+
                 </div>
               );
             })}

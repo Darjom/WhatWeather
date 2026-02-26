@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getWeather } from "../services/weatherService";
+
 export interface WeatherResponse {
   current_weather: {
     temperature: number;
@@ -22,22 +23,28 @@ export interface WeatherResponse {
     precipitation_probability_max: number[];
   };
 }
-export const useWeather = () => {
+
+export const useWeather = (lat: number, lon: number) => {
   const [data, setData] = useState<WeatherResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!lat || !lon) return;
+
     const fetchData = async () => {
       try {
         setLoading(true);
-        const weather = await getWeather();
+        setError(null);
+
+        const weather = await getWeather(lat, lon);
         setData(weather);
+
       } catch (err: unknown) {
-        if (err instanceof Error){
-            setError(err.message)
-        }else{
-            setError("Unexpected Error")
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unexpected Error");
         }
       } finally {
         setLoading(false);
@@ -45,7 +52,7 @@ export const useWeather = () => {
     };
 
     fetchData();
-  }, []);
+  }, [lat, lon]);
 
   return { data, loading, error };
 };
