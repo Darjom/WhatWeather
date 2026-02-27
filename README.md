@@ -1,73 +1,204 @@
-# React + TypeScript + Vite
+# 🌤️ Favorcito Weather  
+### Intelligent Weather Forecast Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Favorcito Weather es una aplicación web moderna de pronóstico del tiempo desarrollada con **React + TypeScript**, diseñada con una arquitectura modular, tipado fuerte y una experiencia de usuario elegante basada en principios de diseño contemporáneo.
 
-Currently, two official plugins are available:
+La plataforma permite buscar cualquier ciudad del mundo y visualizar información meteorológica actualizada en tiempo real, incluyendo condiciones actuales y pronóstico extendido.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Visión del Proyecto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Construir una aplicación meteorológica ligera, moderna y escalable que utilice una única fuente oficial de datos, priorizando:
 
-## Expanding the ESLint configuration
+- Arquitectura limpia
+- Separación de responsabilidades
+- Tipado fuerte
+- Buenas prácticas de desarrollo
+- Experiencia de usuario moderna (Glass UI)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Características Principales
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 🔎 Búsqueda Inteligente de Ciudades
+- Autocompletado dinámico
+- Geocodificación mediante API oficial
+- Debounce automático
+- Manejo seguro de estado
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🌡 Clima Actual
+- Temperatura actual
+- Estado climático traducido
+- Ícono dinámico
+- Hora de actualización
+- Velocidad del viento
+- Humedad sincronizada por hora
+- Probabilidad de precipitación
+
+### 📅 Pronóstico Extendido (7 días)
+- Nombre del día en español
+- Temperatura máxima destacada
+- Temperatura mínima secundaria
+- Iconografía dinámica
+- Carrusel responsive
+
+### 🎨 Interfaz Dinámica
+- Fondo adaptable según condición climática
+- Diseño estilo Glassmorphism
+- Layout completamente responsive
+- Transiciones suaves
+
+---
+
+## 🏗️ Arquitectura Técnica
+
+La aplicación está estructurada bajo un enfoque modular:
+
+```plaintext
+src/
+├── hooks/
+│   └── useWeather.ts
+│
+├── services/
+│   ├── weatherService.ts
+│   └── geocodingService.ts
+│
+├── utils/
+│   ├── weatherMapper.ts
+│   ├── weatherIconMapper.ts
+│   └── weatherLabelMapper.ts
+│
+├── pages/
+│   └── Home.tsx
+│
+├── styles/
+│   └── home.css
+│
+└── assets/
+    ├── icons/
+    └── background/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Principios aplicados:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- ✔ Custom Hooks
+- ✔ Separación Service Layer
+- ✔ Tipado fuerte sin `any`
+- ✔ Manejo robusto de errores
+- ✔ Arquitectura escalable
+- ✔ Código mantenible
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🌍 APIs Utilizadas
+
+### Open-Meteo Forecast API
+https://api.open-meteo.com/v1/forecast
+
+Parámetros utilizados:
+- current_weather
+- hourly=relativehumidity_2m
+- daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max
+- timezone=auto
+
+---
+
+### Open-Meteo Geocoding API
+https://geocoding-api.open-meteo.com/v1/search
+
+Permite convertir nombres de ciudades en coordenadas geográficas (latitud / longitud).
+
+---
+
+## 🛠️ Instalación y Ejecución
+
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/TU-USUARIO/WhatWeather.git
+cd WhatWeather
 ```
+
+### 2️⃣ Instalar dependencias
+
+```bash
+npm install
+```
+
+### 3️⃣ Ejecutar en entorno de desarrollo
+
+```bash
+npm run dev
+```
+
+o si se utiliza Create React App:
+
+```bash
+npm start
+```
+
+La aplicación estará disponible en:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🏭 Scripts Disponibles
+
+```bash
+npm run dev        # Desarrollo
+npm run build      # Build de producción
+npm run preview    # Previsualización de producción
+```
+
+---
+
+## 🔐 Manejo de Errores
+
+La aplicación incluye:
+
+- Validación de respuestas HTTP
+- Manejo seguro de errores desconocidos
+- Protección ante datos incompletos
+- Control de estados de carga
+
+---
+
+## 📈 Escalabilidad
+
+El proyecto está preparado para futuras mejoras como:
+
+- Modo oscuro
+- Historial de búsquedas
+- Geolocalización automática
+- PWA (Progressive Web App)
+- Navegación por teclado en sugerencias
+- Internacionalización (i18n)
+
+---
+
+## 🎯 Objetivo Académico
+
+Este proyecto fue desarrollado como ejercicio práctico para demostrar:
+
+- Consumo correcto de APIs REST
+- Manejo de coordenadas geográficas
+- Integración de múltiples servicios externos
+- Arquitectura frontend moderna
+- Aplicación de buenas prácticas en React + TypeScript
+
+---
+
+## 👨‍💻 Autor
+
+Daniel José Reque Mendoza  
+Frontend Developer  
+
+---
+
+## 📜 Licencia
+
+Proyecto de carácter educativo y demostrativo.
