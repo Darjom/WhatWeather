@@ -104,7 +104,7 @@ const Home = () => {
     currentIndex !== -1 && currentIndex !== undefined
       ? data.hourly.relativehumidity_2m[currentIndex]
       : "--";
-
+  
   // Probabilidad lluvia hoy
   const todayRainProbability =
     data.daily?.precipitation_probability_max?.[0] ?? "--";
