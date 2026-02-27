@@ -1,4 +1,4 @@
-# 🌤️ Favorcito Weather  
+# Favorcito Weather  
 ### Intelligent Weather Forecast Platform
 
 Favorcito Weather es una aplicación web moderna de pronóstico del tiempo desarrollada con **React + TypeScript**, diseñada con una arquitectura modular, tipado fuerte y una experiencia de usuario elegante basada en principios de diseño contemporáneo.
@@ -7,7 +7,7 @@ La plataforma permite buscar cualquier ciudad del mundo y visualizar informació
 
 ---
 
-## 🚀 Visión del Proyecto
+## Visión del Proyecto
 
 Construir una aplicación meteorológica ligera, moderna y escalable que utilice una única fuente oficial de datos, priorizando:
 
@@ -19,15 +19,15 @@ Construir una aplicación meteorológica ligera, moderna y escalable que utilice
 
 ---
 
-## ✨ Características Principales
+## Características Principales
 
-### 🔎 Búsqueda Inteligente de Ciudades
+### Búsqueda Inteligente de Ciudades
 - Autocompletado dinámico
 - Geocodificación mediante API oficial
 - Debounce automático
 - Manejo seguro de estado
 
-### 🌡 Clima Actual
+### Clima Actual
 - Temperatura actual
 - Estado climático traducido
 - Ícono dinámico
@@ -36,14 +36,14 @@ Construir una aplicación meteorológica ligera, moderna y escalable que utilice
 - Humedad sincronizada por hora
 - Probabilidad de precipitación
 
-### 📅 Pronóstico Extendido (7 días)
+### Pronóstico Extendido (7 días)
 - Nombre del día en español
 - Temperatura máxima destacada
 - Temperatura mínima secundaria
 - Iconografía dinámica
 - Carrusel responsive
 
-### 🎨 Interfaz Dinámica
+### Interfaz Dinámica
 - Fondo adaptable según condición climática
 - Diseño estilo Glassmorphism
 - Layout completamente responsive
@@ -51,7 +51,7 @@ Construir una aplicación meteorológica ligera, moderna y escalable que utilice
 
 ---
 
-## 🏗️ Arquitectura Técnica
+## Arquitectura Técnica
 
 La aplicación está estructurada bajo un enfoque modular:
 
@@ -91,7 +91,7 @@ src/
 
 ---
 
-## 🌍 APIs Utilizadas
+## APIs Utilizadas
 
 ### Open-Meteo Forecast API
 https://api.open-meteo.com/v1/forecast
@@ -113,20 +113,20 @@ Permite convertir nombres de ciudades en coordenadas geográficas (latitud / lon
 
 ## 🛠️ Instalación y Ejecución
 
-### 1️⃣ Clonar el repositorio
+### 1️ Clonar el repositorio
 
 ```bash
 git clone https://github.com/TU-USUARIO/WhatWeather.git
 cd WhatWeather
 ```
 
-### 2️⃣ Instalar dependencias
+### 2️ Instalar dependencias
 
 ```bash
 npm install
 ```
 
-### 3️⃣ Ejecutar en entorno de desarrollo
+### 3️ Ejecutar en entorno de desarrollo
 
 ```bash
 npm run dev
@@ -146,7 +146,7 @@ http://localhost:5173
 
 ---
 
-## 🏭 Scripts Disponibles
+## Scripts Disponibles
 
 ```bash
 npm run dev        # Desarrollo
@@ -156,7 +156,7 @@ npm run preview    # Previsualización de producción
 
 ---
 
-## 🔐 Manejo de Errores
+## Manejo de Errores
 
 La aplicación incluye:
 
@@ -167,7 +167,7 @@ La aplicación incluye:
 
 ---
 
-## 📈 Escalabilidad
+## Escalabilidad
 
 El proyecto está preparado para futuras mejoras como:
 
@@ -180,7 +180,7 @@ El proyecto está preparado para futuras mejoras como:
 
 ---
 
-## 🎯 Objetivo Académico
+## Objetivo Académico
 
 Este proyecto fue desarrollado como ejercicio práctico para demostrar:
 
@@ -192,13 +192,13 @@ Este proyecto fue desarrollado como ejercicio práctico para demostrar:
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Daniel José Reque Mendoza  
 Frontend Developer  
 
 ---
 
-## 📜 Licencia
+## Licencia
 
 Proyecto de carácter educativo y demostrativo.
