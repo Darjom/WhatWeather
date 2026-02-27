@@ -146,6 +146,19 @@ http://localhost:5173
 
 ---
 
+## Dependencias Principales (Importante)
+
+El proyecto utiliza las siguientes librerías adicionales:
+
+- Bootstrap
+- Bootstrap Icons
+
+Si por alguna razón no se instalan automáticamente, puedes agregarlas manualmente con:
+
+```bash
+npm install bootstrap
+npm install bootstrap-icons
+
 ## Scripts Disponibles
 
 ```bash
